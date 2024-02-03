@@ -1,15 +1,8 @@
 import { Link } from 'react-router-dom'
+import { Document } from "./../../Interface/Document";
 
-interface Post {
-  body: string;
-  id: number;
-  title: string;
-  createdBy: string;
-  image: string;
-  tagsArray: string[];
-}
 
-export const PostDetail = ({ post }: { post: Post }) => {
+export const PostDetail = ({ post }: { post: Document }) => {
   return (
     <section className="grid grid-cols-2 shadow-2xl 
     hover:shadow-green-700 bg-gradient-to-b from-black to-slate-900 flex-col md:flex-col gap-4 lg:items-center lg:justify-center lg:flex-row" id="caminhada">

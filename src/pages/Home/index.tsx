@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useFetchDocuments } from "../../hooks/useFetchDocuments";
 
 //components
@@ -13,7 +13,7 @@ const Home = () => {
     e.preventDefault();
   };
 
-  console.log(posts);
+  console.log(query);
 
   return (
     <>

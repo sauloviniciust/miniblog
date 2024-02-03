@@ -31,7 +31,6 @@ export const CreatePost = () => {
       setFormError("A imagem precisa ser uma URL.");
     }
 
-
     //criar array de tags
     const tagsArray = tags.split(",").map((tag) => 
     tag.trim().toLowerCase());
@@ -47,8 +46,8 @@ export const CreatePost = () => {
       image,
       body,
       tagsArray,
-      iud: user.uid,
-      createdBy: user.displayName,
+      iud: user?.uid,
+      createdBy: user?.displayName,
     })
 
     navigate("/");

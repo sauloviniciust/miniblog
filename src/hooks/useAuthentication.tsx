@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 
 export const useAuthentication = () => {
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | boolean>("");
   const [loading, setLoading] = useState(false);
   const [cancelled, setCancelled] = useState(false);
   const auth = getAuth();
@@ -24,7 +24,7 @@ export const useAuthentication = () => {
   const createUser = async (data: {
     email: string;
     password: string;
-    displayname: string;
+    displayname?: string;
   }) => {
     checkIfIsCancelled();
 
@@ -83,7 +83,8 @@ export const useAuthentication = () => {
       await signInWithEmailAndPassword(auth, data.email, data.password)
       setLoading(false);
       
-    } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       let systemErrorMessage;
       if (error.message.includes("user-not-found")) {
         systemErrorMessage = "Usuario não encontrado."

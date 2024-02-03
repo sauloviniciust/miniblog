@@ -7,7 +7,8 @@ const initialState = {
   error: null,
 };
 
-const insertReducer = (state, action) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const insertReducer = (state: any, action: { type: any; payload: any; }) => {
   switch ((action.type)) {
     case "LOADING":
       return { loading: true, error: null };
