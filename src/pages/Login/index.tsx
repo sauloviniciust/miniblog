@@ -5,8 +5,8 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | true>("");
-
-  const { login, error: authError, } = useAuthentication();
+  const { login, error: authError, loading } = useAuthentication();
+  
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -44,10 +44,51 @@ export const Login = () => {
                     shadow-2xl shadow-black border border-gray-500 w-64 mx-auto"
       >
         <h1 className="text-xl mb-2">Entrar</h1>
-        <form className="flex flex-col gap-5 mt-5" onSubmit={handleSubmit}>
-          {/* Restante do código permanece inalterado */}
-        </form>
-      </div>
+        <form className="flex flex-col gap-5 mt-5" onSubmit={handleSubmit}><label>
+          <span>E-mail:</span>
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="E-mail do usuário"
+            className="px-2 text-black bg-gray-300"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+        <label>
+          <span>Senha:</span>
+          <input
+            type="password"
+            name="password"
+            required
+            placeholder="Senha do usuário"
+            className="px-2 text-black bg-gray-300"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        {!loading && (
+          <button
+            className="border hover:text-gray-100 hover:border-gray-300 hover:bg-gray-700 hover:shadow-lg hover:shadow-black 
+        text-xl mx-auto w-28 border-gray-500 bg-gray-800"
+          >
+            Entrar
+          </button>
+        )}
+        {loading && (
+          <button
+            disabled
+            className="border hover:text-gray-100 hover:border-gray-300 hover:bg-gray-700 hover:shadow-lg hover:shadow-black 
+        text-xl mx-auto w-28 border-gray-500 bg-gray-800"
+          >
+            Aguarde
+          </button>
+        )}
+
+        {error && <p>{error}</p>}
+      </form>
+    </div>
     </div>
   );
 };
