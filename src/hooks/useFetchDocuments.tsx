@@ -1,11 +1,17 @@
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "../firebase/config";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { Document } from "./../Interface/Document";
 
 export const useFetchDocuments = (
-  docCollection: string, 
-  search = null, 
+  docCollection: string,
+  search = null,
   uid = null
 ) => {
   const [documents, setDocuments] = useState<Array<Document>>([]);
@@ -28,14 +34,21 @@ export const useFetchDocuments = (
         // Busca
         // Dash
 
-        // eslint-disable-next-line prefer-const
-        q = await query(collectionRef, orderBy("createdAt", "desc"));
+        if (search) {
+          q = await query(
+            collectionRef,
+            where("tags", "array-contains", search),
+            orderBy("createdAt", "desc")
+          );
+        } else {
+          q = await query(collectionRef, orderBy("createdAt", "desc"));
+        }
 
         await onSnapshot(q, (querySnapshot) => {
           setDocuments(
             querySnapshot.docs.map((doc) => ({
               id: doc.id,
-              body: doc.data().body, 
+              body: doc.data().body,
               title: doc.data().title,
               createdBy: doc.data().createdBy,
               image: doc.data().image,
@@ -43,9 +56,9 @@ export const useFetchDocuments = (
             }))
           );
         });
-        
+
         setLoading(false);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         console.log(error);
         setError(error.message);

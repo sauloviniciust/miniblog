@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { CreatePost } from "./pages/CreatePost";
 import { Dashboard } from "./pages/Dashboard";
+import { Search } from "./pages/Search";
 
 function App() {
   const [user, setUser] = useState<User | null>(null); // Fornecendo o tipo explicitamente
@@ -27,9 +28,8 @@ function App() {
       setUser(user);
     });
 
-    return () => unsubscribe(); 
+    return () => unsubscribe();
     // Cleanup da subscrição ao desmontar o componente
-
   }, [auth]);
 
   if (loadingUser) {
@@ -39,31 +39,28 @@ function App() {
   return (
     <AuthProvider value={{ user }}>
       <BrowserRouter>
-        <div >
+        <div>
           <Nav />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route 
-            path="/login" 
-            element={!user ? <Login /> : 
-            <Navigate to="/register"/> } 
+            <Route
+              path="/login"
+              element={!user ? <Login /> : <Navigate to="/register" />}
             />
-            <Route 
-            path="/register" 
-            element={!user ? <Register /> : 
-            <Navigate to="/register"/> } 
+            <Route
+              path="/register"
+              element={!user ? <Register /> : <Navigate to="/register" />}
             />
-            <Route 
-            path="/posts/create" 
-            element={user ? <CreatePost /> : 
-            <Navigate to="/register"/> } 
+            <Route
+              path="/posts/create"
+              element={user ? <CreatePost /> : <Navigate to="/register" />}
             />
-            <Route 
-            path="/dashboard" 
-            element={user ? <Dashboard /> : 
-            <Navigate to="/register"/> } 
+            <Route
+              path="/dashboard"
+              element={user ? <Dashboard /> : <Navigate to="/register" />}
             />
-            <Route path="/about" element={<About />} /> 
+            <Route path="/about" element={<About />} />
+            <Route path="/search" element={<Search />} />
           </Routes>
           <Footer />
         </div>
