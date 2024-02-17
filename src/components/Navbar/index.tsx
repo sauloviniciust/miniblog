@@ -6,7 +6,7 @@ export const Nav = () => {
   const { user } = useAuthValue();
   const { logout } = useAuthentication();
 
-  console.log(user)
+  // console.log(user)
 
   return (
     <nav className="bg-gray-700 flex gap-5 justify-between p-2 items-center">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useInsertDocument } from "../../hooks/useInsertDocument";
 import { useAuthValue } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +20,7 @@ export const CreatePost = () => {
   const {user} = useAuthValue();
 
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setFormError("")
 

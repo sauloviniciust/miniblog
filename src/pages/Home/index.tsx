@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useFetchDocuments } from "../../hooks/useFetchDocuments";
 
@@ -7,19 +7,19 @@ import { PostDetail } from "../../components/PostDetail";
 
 const Home = () => {
   const [query, setQuery] = useState("");
-  const { documents: posts, loading } = useFetchDocuments("posts");
+  
+  
+  const { documents: posts, loading } = useFetchDocuments("posts", query);
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
     if (query) {
-      return navigate(`/search/q=${query}`)
+      return navigate(`/search?q=${query}`)
     } 
   };
-
-  console.log(query);
 
   return (
     <>

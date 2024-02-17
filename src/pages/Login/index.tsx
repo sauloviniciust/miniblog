@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useAuthentication } from "../../hooks/useAuthentication";
 
 export const Login = () => {
@@ -8,7 +8,7 @@ export const Login = () => {
   const { login, error: authError, loading } = useAuthentication();
   
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     setError("");

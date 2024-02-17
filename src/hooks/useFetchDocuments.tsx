@@ -11,7 +11,7 @@ import { Document } from "./../Interface/Document";
 
 export const useFetchDocuments = (
   docCollection: string,
-  search = null,
+  search: string | null,
   uid = null
 ) => {
   const [documents, setDocuments] = useState<Array<Document>>([]);
@@ -37,7 +37,7 @@ export const useFetchDocuments = (
         if (search) {
           q = await query(
             collectionRef,
-            where("tags", "array-contains", search),
+            where("tagsArray", "array-contains", search),
             orderBy("createdAt", "desc")
           );
         } else {
